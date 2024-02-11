@@ -142,9 +142,12 @@ export default function SignIn() {
                
                    </div>
 
-                    <div className='pt-6 space-x-2 flex items-center justify-end w-full '>
-                        
+                    <div className='pt-6 space-x-2 flex items-center justify-between w-full '>
+                            <div>
+                                New Here?&nbsp; <a href="/signin" className="text-bold underline">SignUp</a>
+                            </div>
 
+                        <div>
                         <Button
                             disabled={loading} 
                             variant='destructive'
@@ -159,6 +162,7 @@ export default function SignIn() {
                         >
                             Continue
                         </Button>
+                        </div>
                     </div>
                     {/* <div className="flex justify-between pt-6">
                         <Button variant="outline">Cancel</Button>
