@@ -9,8 +9,10 @@ import {Modal} from './ui/modal';
 import { DeleteModal } from './confirm-modal';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { FaEdit } from "react-icons/fa";
+import { FaCheckCircle, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { MdOutlinePendingActions } from "react-icons/md";
+
 interface CardData{
     data:any
 }
@@ -68,6 +70,7 @@ const Card:React.FC<CardData> = ({data}) => {
         />
 
         <AlertModal
+        pending={data?.pending}
         taskid={data?._id}
         title={data.title}
         description={data.description}
@@ -85,8 +88,9 @@ rounded-lg shadow hover:shadow-lg bg-white overflow-hidden">
       <div className="p-4 sm:p-6 flex flex-col h-full">
         <div className="flex flex-col justify-between h-full">
           <div>
-            <a href="#">
+            <a className='flex items-center gap-x-2'>
               <h3 className="text-lg font-semibold ">{data?.title}</h3>
+              {!data.pending ? (<FaCheckCircle size={20} color='green'/>): (<MdOutlinePendingActions size={20} color='red'/>)}
             </a>
             <p className="mt-2 text-sm  line-clamp-3">{data?.description}</p>
             <p className="mt-2 text-sm ">{time}</p>
@@ -103,7 +107,7 @@ rounded-lg shadow hover:shadow-lg bg-white overflow-hidden">
              <Button variant='default' onClick={() => Setopen(true)}>
                 <FaEdit />
              </Button>
-            <Button className="bg-transparent" onClick={() => setdeleteopen(true)}>
+            <Button className="" onClick={() => setdeleteopen(true)}>
                 <MdDelete color="red" />
             </Button>
           </div>

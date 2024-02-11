@@ -147,7 +147,7 @@ export default function SignIn() {
                                 New Here?&nbsp; <a href="/signin" className="text-bold underline">SignUp</a>
                             </div>
 
-                        <div>
+                        <div className="flex gap-x-2">
                         <Button
                             disabled={loading} 
                             variant='destructive'

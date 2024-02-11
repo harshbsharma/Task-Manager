@@ -17,7 +17,7 @@ export async function PATCH(request: CustomNextRequest,response:NextResponse<Res
             return authResult; // Return unauthorized response
         }
         const userId  = request.context?.userId;
-        const {taskid,title,description} = await request.json() as {taskid:string,title:string,description:string};
+        const {taskid,title,description,pending} = await request.json() as {taskid:string,title:string,description:string,pending:boolean};
 
         await connectMongoDB();
         const task = await Topic.findById(taskid);
@@ -29,7 +29,8 @@ export async function PATCH(request: CustomNextRequest,response:NextResponse<Res
 
         const UpdatedTask = await Topic.findByIdAndUpdate(task?._id,{
             title:title,
-            description:description
+            description:description,
+            pending:pending
         },{new:true}).populate('user').exec();
 
         return NextResponse.json({ message: 'Updated Task Succesfully',Task:UpdatedTask }, { status: 201 });

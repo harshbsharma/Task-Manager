@@ -6,8 +6,11 @@ import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import { Checkbox } from "./ui/checkbox"
+import { FormLabel,FormDescription } from "./ui/form"
 
 interface AlertModalProps {
+    pending:boolean
     taskid:string
     title:string
     description:string
@@ -18,6 +21,7 @@ interface AlertModalProps {
 }
 
 export const AlertModal:React.FC<AlertModalProps> = ({
+    pending,
     taskid,
     title,
     description,
@@ -27,6 +31,7 @@ export const AlertModal:React.FC<AlertModalProps> = ({
     loading,
 })=>{
     const [id,setid] = useState(taskid);
+    const [checked,setchecked] = useState(pending)
     const [isMounted,setIsMounted] = useState(false)
     const [tasktitle, setTaskTitle] = useState<string>(title);
     const [taskdesc, setTaskDesc] = useState<string>(description);
@@ -39,7 +44,7 @@ export const AlertModal:React.FC<AlertModalProps> = ({
         console.log(tasktitle)
         console.log(taskdesc)
         console.log(id);
-        const data = {taskid:id,title:tasktitle,description:taskdesc};
+        const data = {taskid:id,title:tasktitle,description:taskdesc,pending:checked};
         const update = await axios.patch('/api/topic/update',data);
         console.log(update);
         onClose();
@@ -63,8 +68,8 @@ export const AlertModal:React.FC<AlertModalProps> = ({
         >
             <form onSubmit={handleSubmitEditTodo}>
         
-                        <h3 className='font-bold text-lg'>Edit task</h3>
-                        <div className='flex flex-col modal-action gap-y-2'>
+                        <h3 className='font-bold text-lg mb-1'>Edit task</h3>
+                        <div className='flex flex-col modal-action gap-y-5'>
                         <Input
                             value={tasktitle}
                             onChange={(e) => setTaskTitle(e.target.value)}
@@ -79,6 +84,19 @@ export const AlertModal:React.FC<AlertModalProps> = ({
                             placeholder='Type here'
                             className='input input-bordered w-full'
                         />
+                        
+                        <div>
+                            <label className="flex gap-x-3 items-center ">
+                            
+                            <Checkbox
+                                checked={checked}
+                                onCheckedChange={()=>setchecked(!checked)}
+                            />
+                            Pending
+                            </label>
+                         
+                        </div>
+                        
                         {/* <button type='submit' className='btn'>
                             Submit
                         </button> */}

@@ -74,7 +74,7 @@ const Navbar = () => {
           {token ? (
         <Button onClick={handleLogout}>Logout</Button>
       ) : (
-        <Button onClick={() => router.push("/signin") }>Login</Button>
+        <Button onClick={() => router.push("/login") }>Login</Button>
       )}
           {token && <Button onClick={()=>router.push("/task/create")}>
               <PlusIcon/>

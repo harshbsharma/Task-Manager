@@ -60,7 +60,7 @@ export default function SignIn() {
         // router.push("/task")
         const response = await axios.post('/api/signup',data);
         console.log(response);
-        router.push('/')
+        router.push('/task');
 
     }
     
@@ -171,7 +171,7 @@ export default function SignIn() {
                             Already A User?&nbsp; <a href="/login" className="text-bold underline">Login</a>
                         </div>
 
-                        <div>
+                        <div className="flex gap-x-2">
                         <Button
                             disabled={loading} 
                             variant='destructive'
