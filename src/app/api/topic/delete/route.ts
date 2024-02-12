@@ -16,10 +16,10 @@ export async function DELETE(request: CustomNextRequest,response:NextResponse<Re
         if (authResult instanceof NextResponse) {
             return authResult; // Return unauthorized response
         }
+        await connectMongoDB();
         const userId  = request.context?.userId;
         const {taskid} = await request.json() as {taskid:string};
 
-        await connectMongoDB();
 
         await Topic.findByIdAndDelete(taskid);
 

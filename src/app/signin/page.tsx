@@ -27,6 +27,8 @@ import Link from "next/link"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { Checkbox } from "@/components/ui/checkbox"
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast"
 
 const formSchema = z.object({
     firstname:z.string().min(2),
@@ -42,6 +44,8 @@ export default function SignIn() {
     //     title:"",
     //     description:""
     // })
+
+    const {toast} = useToast();
     const [loading,setloading] = useState(false);
     const form  = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -60,7 +64,12 @@ export default function SignIn() {
         // router.push("/task")
         const response = await axios.post('/api/signup',data);
         console.log(response);
-        router.push('/task');
+        toast({
+          title: "SignUp Succesfull!!",
+          description: "Please login now to start your journey",
+          action: <ToastAction onClick={()=>router.push("/login")} altText="LogIn">LogIn</ToastAction>,
+        })
+        // router.push('/login');
 
     }
     
