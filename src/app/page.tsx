@@ -16,7 +16,7 @@ export default function Home() {
         const jwt= localStorage.getItem('token');
         setToken(jwt as string);
       }
-  }, []);
+  }, [setToken, token]);
 
   
   return (
