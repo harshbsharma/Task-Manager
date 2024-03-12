@@ -29,7 +29,7 @@ export default function Home() {
   </h1> */}
   <h1 className="text-4xl max-sm:grid max-sm:place-items-center font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 sm:text-5xl md:text-6xl p-6">
     <span className="ml-1">
-       Welcome To &nbsp;
+       Welcome To Your&nbsp;
     </span>
     <span className=" text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
             Task Manager &nbsp;
